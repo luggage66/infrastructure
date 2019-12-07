@@ -3,6 +3,14 @@ variable "org_id" {}
 
 variable "region" {}
 
+variable "project_services" {
+  default = [
+    "container.googleapis.com",
+    "containerregistry.googleapis.com",
+    "compute.googleapis.com"
+  ]
+}
+
 provider "google" {
   region = var.region
 }
@@ -19,12 +27,13 @@ resource "google_project" "monitoring" {
   org_id          = var.org_id
 }
 
-# resource "google_project_services" "monitoring" {
-#   project = google_project.monitoring.project_id
+resource "google_project_service" "project_services" {
+  project = google_project.monitoring.project_id
 
-#   services = [
-#   ]
-# }
+  count              = length(var.project_services)
+  service            = element(var.project_services, count.index)
+  disable_on_destroy = "false"
+}
 
 output "project_id" {
   value = "${google_project.monitoring.project_id}"
