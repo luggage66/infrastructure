@@ -12,3 +12,19 @@ export GOOGLE_PROJECT=${TF_ADMIN}
 
 export TF_VAR_root_dns_hostname="your root dns name"
 ```
+
+Bootstrap google cloud project (based on: https://cloud.google.com/community/tutorials/managing-gcp-projects-with-terraform):
+
+```sh
+cd terraform
+sh bootstrap.sh
+```
+
+Terraform:
+
+```sh
+cd terraform
+source environment.sh
+terraform init
+terraform plan
+```
