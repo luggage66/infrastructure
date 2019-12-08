@@ -6,17 +6,17 @@ module "dns-zone" {
   dns_root_hostname = local.monitoring_dns_hostname
 }
 
-# resource "google_compute_address" "ingress" {
-#   name         = "monitoring-cluster-ingress"
-#   project      = module.monitoring_project.project_id
-#   region       = var.region
-#   address_type = "EXTERNAL"
-# }
-
-resource "google_compute_global_address" "ingress" {
-  name = "monitoring-ingress"
-  project = module.monitoring_project.project_id
+resource "google_compute_address" "ingress" {
+  name         = "monitoring-cluster-ingress"
+  project      = module.monitoring_project.project_id
+  region       = var.region
+  address_type = "EXTERNAL"
 }
+
+# resource "google_compute_global_address" "ingress" {
+#   name = "monitoring-ingress"
+#   project = module.monitoring_project.project_id
+# }
 
 resource "google_dns_record_set" "ingress" {
   managed_zone = module.dns-zone.managed_zone_name
@@ -26,7 +26,7 @@ resource "google_dns_record_set" "ingress" {
   type = "A"
 
   rrdatas = [
-    google_compute_global_address.ingress.address
+    google_compute_address.ingress.address
   ]
 
 }
