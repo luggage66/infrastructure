@@ -1,8 +1,9 @@
 
-resource "google_dns_managed_zone" "dns_zone" {
-  name     = replace(local.monitoring_dns_hostname, ".", "-")
-  project  = module.monitoring_project.project_id
-  dns_name = "${local.monitoring_dns_hostname}."
+module "dns-zone" {
+  source = "../../modules/gcp/dns-zone"
+
+  project_name = module.monitoring_project.project_id
+  dns_root_hostname = local.monitoring_dns_hostname
 }
 
 # resource "google_compute_address" "ingress" {
@@ -18,7 +19,7 @@ resource "google_compute_global_address" "ingress" {
 }
 
 resource "google_dns_record_set" "ingress" {
-  managed_zone =google_dns_managed_zone.dns_zone.name
+  managed_zone = module.dns-zone.managed_zone_name
   project = module.monitoring_project.project_id
   name = "${local.monitoring_dns_hostname}."
   ttl = 300
@@ -31,11 +32,11 @@ resource "google_dns_record_set" "ingress" {
 }
 
 output "managed_zone_name" {
-  value = google_dns_managed_zone.dns_zone.name
+  value = module.dns-zone.managed_zone_name
 }
 
 output "name_servers" {
-  value = google_dns_managed_zone.dns_zone.name_servers
+  value = module.dns-zone.name_servers
 }
 
 module "monitoring_project" {
