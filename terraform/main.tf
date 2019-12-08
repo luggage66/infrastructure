@@ -5,5 +5,8 @@ module "monitoring" {
 
   billing_account    = var.billing_account
   org_id             = var.org_id
-  region             = var.region
+}
+
+output "monitoring_project" {
+  value = module.monitoring.project_id
 }

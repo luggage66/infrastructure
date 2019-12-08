@@ -1,8 +1,7 @@
-
-resource "google_container_cluster" "monitoring" {
-  name     = "monitoring-cluster"
+resource "google_container_cluster" "cluster" {
+  name     = var.k8s_cluster_name
   location = var.region
-  project = google_project.monitoring.project_id
+  project = var.k8s_project
 
   remove_default_node_pool = true
   initial_node_count       = 1
@@ -15,15 +14,13 @@ resource "google_container_cluster" "monitoring" {
       issue_client_certificate = false
     }
   }
-
-  depends_on = [google_project_service.project_services]
 }
 
 resource "google_container_node_pool" "primary_pool" {
   name       = "my-node-pool"
-  project    = google_project.monitoring.project_id
+  project    = var.k8s_project
   location   = var.region
-  cluster    = google_container_cluster.monitoring.name
+  cluster    = google_container_cluster.cluster.name
   node_count = 1
 
   node_config {
