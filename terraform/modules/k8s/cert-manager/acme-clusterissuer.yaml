@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: ${issuer_name}
+  namespace: ${namespace}
+  labels:
+    app: cert-manager
+spec:
+  acme:
+    email: ${admin_email}
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: ${acme_secret_name}
+    solvers:
+      - selector: {}
+        dns01:
+          clouddns:
+            project: ${dns_project}
+            serviceAccountSecretRef:
+              name: ${secret_name}
+              key: ${secret_key}

@@ -18,3 +18,7 @@ output "monitoring_zone" {
 output "monitoring_dns_servers" {
   value = module.monitoring.name_servers
 }
+
+output "static_ip" {
+  value = module.monitoring.static_ip
+}
