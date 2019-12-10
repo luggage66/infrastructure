@@ -11,6 +11,7 @@ export GOOGLE_APPLICATION_CREDENTIALS=${TF_CREDS}
 export GOOGLE_PROJECT=${TF_ADMIN}
 
 export TF_VAR_root_dns_hostname="your root dns name"
+export TF_VAR_admin_email="your email address
 ```
 
 Bootstrap google cloud project (based on: https://cloud.google.com/community/tutorials/managing-gcp-projects-with-terraform):

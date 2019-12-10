@@ -1,4 +1,4 @@
-variable "admin_user_email" {
+variable "admin_email" {
   type    = string
   default = ""
 }

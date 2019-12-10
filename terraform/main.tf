@@ -1,24 +1,21 @@
-module "monitoring" {
-  source             = "./environments/monitoring"
+module "prod" {
+  source = "./environments/prod"
 
-  billing_account    = var.billing_account
-  org_id             = var.org_id
-  base_hostname      = var.root_dns_hostname
-  region             = var.region
+  billing_account  = var.billing_account
+  org_id           = var.org_id
+  base_hostname    = var.root_dns_hostname
+  region           = var.region
+  admin_email = var.admin_email
 }
 
-output "monitoring_project" {
-  value = module.monitoring.project_id
+output "prod_project_id" {
+  value = module.prod.project_id
 }
 
-output "monitoring_zone" {
-  value = module.monitoring.managed_zone_name
-}
-
-output "monitoring_dns_servers" {
-  value = module.monitoring.name_servers
+output "prod_dns_servers" {
+  value = module.prod.name_servers
 }
 
 output "static_ip" {
-  value = module.monitoring.static_ip
+  value = module.prod.static_ip
 }

@@ -1,7 +1,3 @@
-data "external" "email" {
-  program = ["bash", "-c", "gcloud config get-value account | jq -R '{email:.}'"]
-}
-
 resource "kubernetes_cluster_role_binding" "user-cluster-admin" {
   metadata {
     name = "tf-cluster-admin"
@@ -15,7 +11,7 @@ resource "kubernetes_cluster_role_binding" "user-cluster-admin" {
 
   subject {
     kind = "User"
-    name = var.admin_user_email != "" ? var.admin_user_email : data.external.email.result.email
+    name = var.admin_email
   }
 }
 

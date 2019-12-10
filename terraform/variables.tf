@@ -6,3 +6,7 @@ variable "region" {
 variable "root_dns_hostname" {
   type = string
 }
+
+variable "admin_email" {
+  type = string
+}

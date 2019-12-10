@@ -37,3 +37,8 @@ resource "google_container_node_pool" "primary_pool" {
     ]
   }
 }
+
+module "tiller" {
+  source = "../../k8s/tiller"
+  admin_email = var.admin_email
+}

@@ -1,9 +1,9 @@
-provider "google" {
-}
+# provider "google" {
+# }
 
-provider "helm" {
-}
+# provider "helm" {
+# }
 
-provider "kubernetes" {
-}
+# provider "kubernetes" {
+# }
 
