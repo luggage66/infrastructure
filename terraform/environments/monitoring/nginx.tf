@@ -12,6 +12,7 @@ resource "helm_release" "nginx" {
   name = "nginx-ingress"
   chart = "stable/nginx-ingress"
   namespace = var.ingress_namespace_name
+  version = "1.25.2"
 
   # set {
   #   name = "service.loadBalancerIP"
@@ -24,6 +25,14 @@ resource "helm_release" "nginx" {
   set {
     name = "controller.publishService.enabled"
     value = true
+  }
+  set {
+    name = "controller.service.loadBalancerIP"
+    value = google_compute_address.ingress.address
+  }
+  set {
+    name = "controller.extraArgs.default-ssl-certificate"
+    value = "cert-manager/istio-ingressgateway-certs"
   }
   # set {
   #   name = "ingress.hosts[0].host"
