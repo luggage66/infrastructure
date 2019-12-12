@@ -6,6 +6,11 @@ module "prod" {
   base_hostname    = var.root_dns_hostname
   region           = var.region
   admin_email = var.admin_email
+
+  providers = {
+    google = google
+    google-beta = google-beta
+  }
 }
 
 output "prod_project_id" {

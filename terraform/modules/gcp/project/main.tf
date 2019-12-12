@@ -1,14 +1,11 @@
 variable "project_name" {}
 variable "billing_account" {}
 variable "org_id" {}
-variable "region" {}
 variable "project_services" {
   default = []
 }
 
-provider "google" {
- region = var.region
-}
+provider "google" {}
 
 resource "random_id" "id" {
  byte_length = 4

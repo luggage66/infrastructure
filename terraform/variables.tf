@@ -10,3 +10,8 @@ variable "root_dns_hostname" {
 variable "admin_email" {
   type = string
 }
+
+variable "google_credentials_path" {
+  description = "Path to a google service accounts credentials jsons file"
+  type = string
+}

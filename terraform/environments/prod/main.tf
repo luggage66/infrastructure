@@ -2,7 +2,6 @@ module "prod_project" {
   source = "../../modules/gcp/project"
 
   project_name    = "prod"
-  region          = var.region
   billing_account = var.billing_account
   org_id          = var.org_id
 
@@ -12,6 +11,10 @@ module "prod_project" {
     "compute.googleapis.com",
     "dns.googleapis.com"
   ]
+
+  providers = {
+    google = google
+  }
 }
 
 module "dns-zone" {
@@ -62,6 +65,7 @@ module "cert-manager" {
 
   providers = {
     google     = google
+    google-beta = google-beta
     kubernetes = kubernetes
     helm       = helm
   }

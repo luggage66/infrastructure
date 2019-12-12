@@ -5,3 +5,4 @@ provider "helm" {
   tiller_image    = "gcr.io/kubernetes-helm/tiller:v${var.tiller_version}"
 }
 provider "kubernetes" {}
+provider "google-beta" {}

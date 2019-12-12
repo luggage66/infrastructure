@@ -1,0 +1,5 @@
+google_credentials_path = "/home/dmull/.config/gcloud/my-service-account.json"
+admin_email = "admin@example.com"
+org_id = "0000000000"
+billing_account = "foo-foo-foo"
+root_dns_hostname = "example.com"
