@@ -13,7 +13,7 @@ variable "admin_email" {
 
 variable "google_credentials_path" {
   description = "Path to a google service accounts credentials jsons file"
-  type = string
+  type        = string
 }
 
 variable "oauth_client_id" {

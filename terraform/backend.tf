@@ -1,6 +1,6 @@
 terraform {
- backend "gcs" {
-   bucket  = "luggage66-terraform-admin"
-   prefix  = "terraform/state"
- }
+  backend "gcs" {
+    bucket = "luggage66-terraform-admin"
+    prefix = "terraform/state"
+  }
 }
