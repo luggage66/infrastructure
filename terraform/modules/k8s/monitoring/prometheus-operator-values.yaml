@@ -1,0 +1,54 @@
+# see full values @ https://github.com/helm/charts/blob/master/stable/prometheus-operator/values.yaml
+prometheus:
+  prometheusSpec:
+    retentionSize: "${retention_size_gb}GiB"
+    retention: "${retention}"
+    storageSpec:
+      volumeClaimTemplate:
+        apiVersion: v1
+        kind: PersistentVolumeClaim
+        metadata:
+          name: pvc-prometheus-claim
+        spec:
+          storageClassName: ${storage_class}
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: "${storage_size_gb}Gi"
+prometheusOperator:
+  createCustomResource: ${create_crds}
+grafana:
+  # service:
+  #   type: ClusterIP
+  # grafana.ini:
+  #   log:
+  #     level: ${grafana_log_level}
+  #   server:
+  #     domain: ${grafana_host}
+  #     root_url: ${grafana_root_url}
+  #   auth:
+  #     signout_redirect_url: ${grafana_oauth_logout_url}?client_id=${grafana_oauth_client_id}&returnTo=${grafana_root_url}
+  #   auth.google:
+  #     name: ${grafana_oauth_name}
+  #     enabled: ${grafana_oauth_enabled}
+  #     client_id: ${grafana_oauth_client_id}
+  #     client_secret: ${grafana_oauth_client_secret}
+  #     scopes: "${grafana_oauth_scopes}"
+  #     auth_url: ${grafana_oauth_auth_url}
+  #     token_url: ${grafana_oauth_token_url}
+  #     allow_sign_up: true
+  #     role_attribute_path: "${grafana_oauth_role_attribute_path}"
+  ingress:
+    enabled: ${grafana_ingress_enabled}
+    tls:
+      - secretName: ${grafana_certificate_secret_name}
+        hosts:
+          - ${grafana_host}
+    path: ${grafana_path}/
+    hosts:
+      - ${grafana_host}
+    annotations:
+      kubernetes.io/ingress.class: "nginx"
+alertmanager:
+  enabled: ${alertmanager_enabled}

@@ -15,3 +15,10 @@ variable "google_credentials_path" {
   description = "Path to a google service accounts credentials jsons file"
   type = string
 }
+
+variable "oauth_client_id" {
+  type = string
+}
+variable "oauth_client_secret" {
+  type = string
+}

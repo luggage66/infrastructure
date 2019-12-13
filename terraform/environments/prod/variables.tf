@@ -18,3 +18,10 @@ variable "admin_email" {
 variable "ingress_namespace_name" {
   default = "nginx-ingress"
 }
+
+variable "oauth_client_id" {
+  type = string
+}
+variable "oauth_client_secret" {
+  type = string
+}

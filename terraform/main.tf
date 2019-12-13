@@ -7,6 +7,9 @@ module "prod" {
   region           = var.region
   admin_email = var.admin_email
 
+  oauth_client_id = var.oauth_client_id
+  oauth_client_secret = var.oauth_client_secret
+
   providers = {
     google = google
     google-beta = google-beta

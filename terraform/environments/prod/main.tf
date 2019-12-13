@@ -43,13 +43,25 @@ resource "google_dns_record_set" "ingress" {
   ]
 }
 
+resource "google_dns_record_set" "ingress-wildcard" {
+  managed_zone = module.dns-zone.managed_zone_name
+  project      = module.prod_project.project_id
+  name         = "*.${var.base_hostname}."
+  ttl          = 300
+  type         = "CNAME"
+
+  rrdatas = [
+    "${var.base_hostname}."
+  ]
+}
+
 module "cluster" {
   source = "../../modules/gcp/simple-cluster"
 
   k8s_project      = module.prod_project.project_id
   region           = "us-east4"
   k8s_cluster_name = "my-cluster"
-  admin_email = var.admin_email
+  admin_email      = var.admin_email
 }
 
 module "cert-manager" {
@@ -64,10 +76,26 @@ module "cert-manager" {
   certificate_base_hostname = var.base_hostname
 
   providers = {
-    google     = google
+    google      = google
     google-beta = google-beta
-    kubernetes = kubernetes
-    helm       = helm
+    kubernetes  = kubernetes
+    helm        = helm
   }
 }
 
+module "monitoring" {
+  source = "../../modules/k8s/monitoring"
+
+  k8s_project      = module.prod_project.project_id
+  k8s_cluster_name = "my-cluster"
+  region           = var.region
+  base_hostname = var.base_hostname
+
+  oauth_client_id     = var.oauth_client_id
+  oauth_client_secret = var.oauth_client_secret
+  grafana_ingress_ip_address_name    = google_compute_address.ingress.name
+
+  fake_depends_on = [
+    module.cluster
+  ]
+}
