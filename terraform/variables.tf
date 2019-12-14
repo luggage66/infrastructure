@@ -3,6 +3,9 @@ variable "org_id" {}
 variable "region" {
   default = "us-east4"
 }
+variable "location" {
+  default = "us-east4-a"
+}
 variable "root_dns_hostname" {
   type = string
 }

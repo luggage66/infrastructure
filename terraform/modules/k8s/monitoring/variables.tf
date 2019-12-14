@@ -4,7 +4,7 @@ variable "namespace" {
   description = "The Kubernetes namespace to install prometheus-operator"
 }
 
-variable "region" {
+variable "location" {
   type = string
 }
 

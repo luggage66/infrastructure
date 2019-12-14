@@ -1,7 +1,5 @@
-variable "region" {
+variable "location" {
   type        = string
-  default     = "us-central1"
-  description = "The default region for Google cloud services"
 }
 
 variable "project" {

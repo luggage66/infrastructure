@@ -59,7 +59,7 @@ module "cluster" {
   source = "../../modules/gcp/simple-cluster"
 
   k8s_project      = module.prod_project.project_id
-  region           = "us-east4"
+  location         = "us-east4-a"
   k8s_cluster_name = "my-cluster"
   admin_email      = var.admin_email
 }
@@ -68,7 +68,7 @@ module "cert-manager" {
   source = "../../modules/k8s/cert-manager"
 
   project          = module.prod_project.project_id
-  region           = var.region
+  location         = var.location
   k8s_cluster_name = module.cluster.k8s_cluster_name
 
   dns_project               = module.prod_project.project_id
@@ -88,7 +88,7 @@ module "monitoring" {
 
   k8s_project      = module.prod_project.project_id
   k8s_cluster_name = "my-cluster"
-  region           = var.region
+  location         = var.location
   base_hostname = var.base_hostname
 
   oauth_client_id     = var.oauth_client_id

@@ -5,6 +5,7 @@ module "prod" {
   org_id          = var.org_id
   base_hostname   = var.root_dns_hostname
   region          = var.region
+  location        = var.location
   admin_email     = var.admin_email
 
   oauth_client_id     = var.oauth_client_id

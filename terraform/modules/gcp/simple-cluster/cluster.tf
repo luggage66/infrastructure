@@ -1,6 +1,6 @@
 resource "google_container_cluster" "cluster" {
   name     = var.k8s_cluster_name
-  location = var.region
+  location = var.location
   project = var.k8s_project
 
   remove_default_node_pool = true
@@ -19,7 +19,7 @@ resource "google_container_cluster" "cluster" {
 resource "google_container_node_pool" "primary_pool" {
   name       = "my-node-pool"
   project    = var.k8s_project
-  location   = var.region
+  location   = var.location
   cluster    = google_container_cluster.cluster.name
   node_count = 1
 

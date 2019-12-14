@@ -36,7 +36,7 @@ resource "null_resource" "cert-manager-crds" {
 
   provisioner "local-exec" {
     command = <<EOF
-    kubectl apply --context gke_${var.project}_${var.region}_${var.k8s_cluster_name} --validate=false -f ${path.module}/crds.yaml
+    kubectl apply --context gke_${var.project}_${var.location}_${var.k8s_cluster_name} --validate=false -f ${path.module}/crds.yaml
 EOF
 
   }
@@ -63,7 +63,7 @@ resource "null_resource" "cert-manager-clusterissuer" {
 
   provisioner "local-exec" {
     command = <<EOF
-echo '${data.template_file.cert-manager-clusterissuer.rendered}' | kubectl apply --context gke_${var.project}_${var.region}_${var.k8s_cluster_name} -f -
+echo '${data.template_file.cert-manager-clusterissuer.rendered}' | kubectl apply --context gke_${var.project}_${var.location}_${var.k8s_cluster_name} -f -
 EOF
 
   }
@@ -93,7 +93,7 @@ resource "null_resource" "cert-manager-certificate" {
 
   provisioner "local-exec" {
     command = <<EOF
-echo '${data.template_file.cert-manager-certificate.rendered}' | kubectl apply --context gke_${var.project}_${var.region}_${var.k8s_cluster_name} -f -
+echo '${data.template_file.cert-manager-certificate.rendered}' | kubectl apply --context gke_${var.project}_${var.location}_${var.k8s_cluster_name} -f -
 EOF
 
   }

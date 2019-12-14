@@ -30,7 +30,7 @@ data "template_file" "prometheus-operator-values" {
     grafana_oauth_auth_url = local.grafana_oauth.auth_url
     grafana_oauth_token_url = local.grafana_oauth.token_url
     grafana_oauth_logout_url = local.grafana_oauth.logout_url
-    grafana_oauth_role_attribute_path = local.grafana_oauth.role_attribute_path
+    grafana_oauth_role_attribute_path = "" # local.grafana_oauth.role_attribute_path
   }
 }
 
@@ -65,7 +65,7 @@ resource "null_resource" "prometheus-operator-certificate" {
 
   provisioner "local-exec" {
     command = <<EOF
-echo '${data.template_file.prometheus-operator-certificate.rendered}' | kubectl apply --context gke_${var.k8s_project}_${var.region}_${var.k8s_cluster_name} -f -
+echo '${data.template_file.prometheus-operator-certificate.rendered}' | kubectl apply --context gke_${var.k8s_project}_${var.location}_${var.k8s_cluster_name} -f -
 EOF
 
   }

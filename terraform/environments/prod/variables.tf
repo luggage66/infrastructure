@@ -1,6 +1,7 @@
 variable "billing_account" {}
 variable "org_id" {}
 variable "region" {}
+variable "location" {}
 
 variable "base_hostname" {
   type        = string
