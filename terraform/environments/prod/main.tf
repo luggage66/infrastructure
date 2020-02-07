@@ -99,3 +99,17 @@ module "monitoring" {
     module.cluster
   ]
 }
+
+module "jupyterhub" {
+  source = "../../modules/k8s/jupyterhub"
+
+  k8s_project      = module.prod_project.project_id
+  k8s_cluster_name = "my-cluster"
+  location         = var.location
+
+  base_hostname = var.base_hostname
+
+  fake_depends_on = [
+    module.cluster
+  ]
+}
