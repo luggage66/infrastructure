@@ -21,11 +21,16 @@ resource "google_container_node_pool" "primary_pool" {
   project    = var.k8s_project
   location   = var.location
   cluster    = google_container_cluster.cluster.name
-  node_count = 2
+  node_count = 1
+
+  management {
+    auto_upgrade = true
+  }
 
   node_config {
     preemptible  = false
-    machine_type = "n1-standard-1"
+    machine_type = "n1-standard-2"
+    
 
     metadata = {
       disable-legacy-endpoints = "true"
