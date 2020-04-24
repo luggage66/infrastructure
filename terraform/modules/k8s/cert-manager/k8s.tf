@@ -102,7 +102,8 @@ EOF
 }
 
 resource "helm_release" "cert-manager" {
-  chart     = "${var.chart_repo}/cert-manager"
+  chart     = "cert-manager"
+  repository = data.helm_repository.cert-manager.metadata[0].name
   name      = var.release_name
   version   = "v${var.chart_version}"
   namespace = var.namespace

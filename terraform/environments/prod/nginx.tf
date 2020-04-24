@@ -9,10 +9,11 @@ resource "kubernetes_namespace" "nginx" {
 
 # helm install --name nginx-ingress stable/nginx-ingress --set rbac.create=true --set controller.publishService.enabled=true
 resource "helm_release" "nginx" {
-  name      = "nginx-ingress"
-  chart     = "stable/nginx-ingress"
-  namespace = var.ingress_namespace_name
-  version   = "1.25.2"
+  name       = "nginx-ingress"
+  chart      = "nginx-ingress"
+  repository = "stable"
+  namespace  = var.ingress_namespace_name
+  version    = "1.25.2"
 
   set {
     name  = "rbac.create"
