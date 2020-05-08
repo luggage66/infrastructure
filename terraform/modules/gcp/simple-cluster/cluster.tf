@@ -51,7 +51,7 @@ resource "google_container_node_pool" "minecraft" {
   project    = var.k8s_project
   location   = var.location
   cluster    = google_container_cluster.cluster.name
-  node_count = 1
+  node_count = 2
 
   management {
     auto_upgrade = true

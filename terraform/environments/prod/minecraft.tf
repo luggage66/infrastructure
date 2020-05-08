@@ -6,7 +6,7 @@ resource "google_compute_firewall" "minecraft" {
 
   allow { 
     protocol = "tcp"
-    ports = [ "25565", "25575" ]
+    ports = [ "25565", "25575", "25566", "25576" ]
   }
 
   target_tags = [ module.cluster.node_pool_network_tag ]
